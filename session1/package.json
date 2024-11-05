@@ -1,0 +1,23 @@
+{
+  "name": "http-server",
+  "version": "1.0.0",
+  "description": "crio node server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aditya-docs/node-201-nov-24.git"
+  },
+  "author": "Aditya Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aditya-docs/node-201-nov-24/issues"
+  },
+  "homepage": "https://github.com/aditya-docs/node-201-nov-24#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
