@@ -1,0 +1,11 @@
+GET http://localhost:8082
+###
+GET http://localhost:8082/status
+###
+GET http://localhost:8082/currencies
+###
+GET http://localhost:8082/currencies/aedddd
+###
+GET http://localhost:8082/currencies?min_value=0.001
+###
+GET http://localhost:8082/users/8236728/posts/2376152/comments/3672576
