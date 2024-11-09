@@ -1,0 +1,27 @@
+GET http://localhost:8082
+###
+GET http://localhost:8082/status
+###
+GET http://localhost:8082/currencies
+###
+GET http://localhost:8082/currencies/aedddd
+###
+GET http://localhost:8082/currencies?min_value=0.001
+###
+GET http://localhost:8082/users/8236728/posts/2376152/comments/3672576
+###
+GET http://localhost:8082/users
+###
+GET http://localhost:8082/users/6607d086-7159-4c26-beb1-280c9f9cbf35
+###
+GET http://localhost:8082/users/search?gender=female&age=49
+###
+GET http://localhost:8082/users/search?gender=female
+###
+GET http://localhost:8082/users/search?age=49
+###
+GET http://localhost:8082/users/search
+###
+GET http://localhost:8082/users/search?age=male
+###
+GET http://localhost:8082/users/search?gender=49
