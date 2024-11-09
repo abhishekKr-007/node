@@ -1,8 +1,8 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   getCurrencies,
   getCurrencyBySymbol,
-} = require("./controllers/currencies.controllers");
+} from "./controllers/currencies.controllers.js";
 const PORT = 8082;
 
 const app = express();
@@ -14,11 +14,6 @@ app.get("/", (req, res) => {
 app.get("/currencies", getCurrencies);
 
 app.get("/currencies/:symbol", getCurrencyBySymbol);
-
-// app.get("/users/:userId/posts/:postId/comments/:commentId", (req, res) => {
-//   console.log(req.params);
-//   res.send("dummy response");
-// });
 
 app.listen(PORT, () => {
   console.log(`Server lisenting on PORT:${PORT}`);
