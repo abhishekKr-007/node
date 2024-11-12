@@ -1,6 +1,9 @@
 const usersJson = require("./users.json");
+const { userSearchSchema } = require("../validations/userSearchValidation");
 
 const getUsers = (req, res) => {
+  if (req.headers.authorization !== process.env.PASSWORD)
+    return res.sendStatus(401); // return res.status(401).send({ message: "You are not authorized" });
   res.send(usersJson.data);
 };
 
@@ -16,17 +19,19 @@ const getUserById = (req, res) => {
 
 const searchUsers = (req, res) => {
   const { gender, age } = req.query;
-  const validGenders = ["male", "female"];
 
-  if (gender && !validGenders.includes(gender))
-    return res
-      .status(400)
-      .send({ message: "Gender must be either male or female." });
+  const { error } = userSearchSchema.validate({ gender, age });
+  if (error) return res.status(400).send({ message: error.details[0].message });
 
-  if ((age && isNaN(age)) || age < 0 || age > 100)
-    return res
-      .status(400)
-      .send({ message: "Age must be a number between 0 and 100" });
+  // if (gender && !validGenders.includes(gender))
+  //   return res
+  //     .status(400)
+  //     .send({ message: "Gender must be either male or female." });
+
+  // if ((age && isNaN(age)) || age < 0 || age > 100)
+  //   return res
+  //     .status(400)
+  //     .send({ message: "Age must be a number between 0 and 100" });
 
   if (gender && age)
     return res.send(
