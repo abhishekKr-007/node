@@ -33,15 +33,15 @@ POST http://localhost:8082/blogs/new
 Content-Type: application/json
 
 {
-  "title": "Blog on Mussorie",
-  "authors": ["Ruskin Bond"]
+  "title": "Blog on Dehradun",
+  "authors": ["Jim Corbett"]
 }
 ###
 GET http://localhost:8082/blogs
 ###
 GET http://localhost:8082/blogs/6738d40c63fbd483e7b4d890
 ###
-PATCH http://localhost:8082/blogs/6738be9f42d4889416d2444x
+PATCH http://localhost:8082/blogs/6738d51f1778c62cb9423079
 Content-Type: application/json
 
 {
