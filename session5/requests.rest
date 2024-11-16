@@ -33,8 +33,20 @@ POST http://localhost:8082/blogs/new
 Content-Type: application/json
 
 {
-  "title": "New blog",
-  "authors": ["John doe", "Jane doe"],
-  "content": "very nice blog",
-  "publishedAt": null
+  "title": "Blog on Mussorie",
+  "authors": ["Ruskin Bond"]
 }
+###
+GET http://localhost:8082/blogs
+###
+GET http://localhost:8082/blogs/6738d40c63fbd483e7b4d890
+###
+PATCH http://localhost:8082/blogs/6738be9f42d4889416d2444x
+Content-Type: application/json
+
+{
+  "content": "Lorem ipsum dolor sit"
+}
+
+###
+DELETE http://localhost:8082/blogs/6738d40c63fbd483e7b4d890
