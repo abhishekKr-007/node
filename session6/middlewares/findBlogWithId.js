@@ -1,9 +1,9 @@
-const Blog = require("../models/blog.model");
+const { getById } = require("../services/blogs.service");
 
 const findBlogWithId = async (req, res, next) => {
   const { blogId } = req.params;
   try {
-    const reqBlog = await Blog.findById(blogId);
+    const reqBlog = await getById(blogId);
     if (!reqBlog)
       return res
         .status(404)

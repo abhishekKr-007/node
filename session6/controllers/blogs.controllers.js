@@ -1,11 +1,9 @@
-const Blog = require("../models/blog.model");
+const BlogService = require("../services/blogs.service");
+const BlogServiceInstance = new BlogService();
 
 const createNewBlog = async (req, res) => {
   try {
-    const newBlog = new Blog(req.body);
-    await newBlog.save();
-    // OR
-    // const newBlog = await Blog.create(req.body);
+    const newBlog = await BlogServiceInstance.create(req.body);
     res.status(201).send(newBlog);
   } catch (error) {
     if (error.name === "ValidationError")
@@ -20,7 +18,7 @@ const createNewBlog = async (req, res) => {
 
 const getBlogs = async (req, res) => {
   try {
-    res.send(await Blog.find());
+    res.send(await BlogServiceInstance.getAll());
   } catch (error) {
     res
       .status(500)
@@ -35,10 +33,7 @@ const getBlogById = (req, res) => {
 const updateBlogById = async (req, res) => {
   try {
     const { blogId } = req.params;
-    const updatedBlog = await Blog.findByIdAndUpdate(blogId, req.body, {
-      // returnDocument: "after",
-      new: true,
-    });
+    const updatedBlog = await BlogServiceInstance.updateById(blogId, req.body);
     res.status(200).send(updatedBlog);
   } catch (error) {
     res
@@ -50,9 +45,8 @@ const updateBlogById = async (req, res) => {
 const deleteBlogById = async (req, res) => {
   try {
     const { blogId } = req.params;
-    await Blog.findByIdAndDelete(blogId);
+    await BlogServiceInstance.deleteById(blogId);
     res.sendStatus(204);
-    // res.send(204).send({ message: `Blog was deleted successfully` });
   } catch (error) {
     res
       .status(500)
@@ -60,34 +54,54 @@ const deleteBlogById = async (req, res) => {
   }
 };
 
+// const searchBlogs = async (req, res) => {
+//   const { title, author } = req.query;
+
+//   // 3 ways of searching for title
+
+//   // const titleRegex = new RegExp(title, "i"); // case insensitive regex
+//   // res.send(await Blog.find({ title: titleRegex }));
+
+//   // res.send(
+//   //   await Blog.find({ title: { $regex: new RegExp(title, "i") } })
+//   // );
+
+//   // res.send(
+//   //   await Blog.find({ title: { $regex: new RegExp(title), $options: "i" } })
+//   // );
+
+//   const titleQuery = { title: { $regex: new RegExp(title), $options: "i" } };
+//   const authorQuery = { authors: { $elemMatch: { email: author } } };
+
+//   try {
+//     if (title && author)
+//       return res.send(await Blog.find({ $and: [titleQuery, authorQuery] }));
+//     else if (title) return res.send(await Blog.find(titleQuery));
+//     else if (author) return res.send(await Blog.find(authorQuery));
+//     else
+//       return res
+//         .status(400)
+//         .send({ message: `One of 'title' or 'author' must be passed!` });
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .send({ message: `Something went wrong. Please try again!`, error });
+//   }
+// };
+
 const searchBlogs = async (req, res) => {
   const { title, author } = req.query;
 
-  // 3 ways of searching for title
-
-  // const titleRegex = new RegExp(title, "i"); // case insensitive regex
-  // res.send(await Blog.find({ title: titleRegex }));
-
-  // res.send(
-  //   await Blog.find({ title: { $regex: new RegExp(title, "i") } })
-  // );
-
-  // res.send(
-  //   await Blog.find({ title: { $regex: new RegExp(title), $options: "i" } })
-  // );
-
-  const titleQuery = { title: { $regex: new RegExp(title), $options: "i" } };
-  const authorQuery = { authors: { $elemMatch: { email: author } } };
-
   try {
-    if (title && author)
-      return res.send(await Blog.find({ $and: [titleQuery, authorQuery] }));
-    else if (title) return res.send(await Blog.find(titleQuery));
-    else if (author) return res.send(await Blog.find(authorQuery));
-    else
+    const result = await BlogServiceInstance.searchByTitleOrAuthor(
+      title,
+      author
+    );
+    if (!result)
       return res
         .status(400)
         .send({ message: `One of 'title' or 'author' must be passed!` });
+    res.status(200).send(result);
   } catch (error) {
     res
       .status(500)
