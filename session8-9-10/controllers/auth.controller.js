@@ -34,7 +34,7 @@ const postLogin = async (req, res) => {
       .cookie(
         "remember-user-token",
         AuthServiceInstance.generateJwt({ userId: reqUser._id }),
-        { httpOnly: true, maxAge: 2 * 60 * 60 * 1000 } // expires: new Date("Mon, 25 Nov 2024 16:15:15 GMT")
+        { httpOnly: true, maxAge: 1 * 60 * 1000 } // expires: new Date("Mon, 25 Nov 2024 16:15:15 GMT")
       )
       .send({
         isLoggedIn,
