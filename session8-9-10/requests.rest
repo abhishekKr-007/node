@@ -1,16 +1,30 @@
 POST http://localhost:8082/auth/signup
 Content-Type: application/json
 
+# {
+#     "email": "lm10@rmcf.com",
+#     "username": "lm10",
+#     "password": "lukita@croatia10"
+# }
+
 {
-    "email": "lm10@rmcf.com",
-    "username": "lm10",
-    "password": "lukita@croatia10"
+    "email": "cr7@portugal.com",
+    "username": "cristiano",
+    "password": "cris@777"
 }
 ###
 POST http://localhost:8082/auth/login
 Content-Type: application/json
 
+# {
+#     "username": "lm10",
+#     "password": "lukita@croatia10"
+# }
+
 {
-    "username": "lm10",
-    "password": "lukita@croatia10"
+    "username": "cristiano",
+    "password": "cris@777"
 }
+###
+GET http://localhost:8082/user/cristiano
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQ0YTk4N2M4ZmQzMGEzMzg5OGViYTkiLCJpYXQiOjE3MzI1NTQ3MjgsImV4cCI6MTczMjU1NDc4OH0.gQg57qS6acvmavZCwkJodRwR_zjq36HJXpeV9Ikl0Vo
